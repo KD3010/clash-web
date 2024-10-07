@@ -17,7 +17,7 @@ function Hero() {
         <div className='text-center'>
             <h1 className='text:6xl md:text-7xl lf:text-9xl font-extrabold bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text'>Clash</h1>
             <p className='text-2xl md:text-3xl lg:text-4xl font-bold mb-4'>Discover the better choice, together</p>
-            <Link href="/login"><Button>Start Free</Button></Link>
+            <Link href="/login"><Button className='w-[110px] h-[48px] rounded-lg text-md'>Start Free</Button></Link>
         </div>
     </div>
   )
