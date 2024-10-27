@@ -1,6 +1,6 @@
-import React from 'react'
-import Link from 'next/link'
-import RegisterForm from '@/components/common/RegisterForm'
+import React from 'react';
+import Link from 'next/link';
+import RegisterForm from '@/components/common/RegisterForm';
 
 function page() {
  return (

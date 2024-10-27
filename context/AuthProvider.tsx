@@ -1,5 +1,6 @@
 'use client'
 import React, { createContext, useReducer, type ReactNode } from "react";
+import axios from 'axios';
 
 interface InititalSessionType {
   name: string,
@@ -13,8 +14,8 @@ const initialSession: InititalSessionType = {
   isVerified: false
 }
 
-export const SessionContext = createContext<InititalSessionType>(initialSession);
-export const SessionDispatchContext = createContext(null);
+const SessionContext = createContext<InititalSessionType>(initialSession);
+const SessionDispatchContext = createContext(null);
 
 export default function AuthProvider({children}: {children: ReactNode}) {
 
@@ -45,4 +46,15 @@ function sessionReducer(state: InititalSessionType, action: any) {
       throw Error('Unknown Action : ' + action.type)
     }
   }
+}
+
+const API_BASE_PATH = 'http://localhost:8000/api';
+
+export const registerUser = async (data: {name: string, email: string, password: string, confirm_password: string}, callbackFn: Function) => {
+  axios.post(API_BASE_PATH + '/auth/register', data)
+  .then(response => {
+    callbackFn && callbackFn(response);
+  }).catch(error => {
+    callbackFn && callbackFn(error.response);
+  })
 }
