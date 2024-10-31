@@ -30,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-100`}
       >
+        "Happy Diwali, I am going to be rich!"
         <main><AppProvider>{children}</AppProvider></main>
         <Toaster />
       </body>
