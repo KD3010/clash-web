@@ -58,3 +58,13 @@ export const registerUser = async (data: {name: string, email: string, password:
     callbackFn && callbackFn(error.response);
   })
 }
+
+export const loginUser = async (data: {email: string, password: string}, callbackFn: Function) => {
+  axios.post(API_BASE_PATH + '/auth/login', data)
+  .then(response => {
+    callbackFn && callbackFn(response)
+  }).catch(error => {
+    console.log(error)
+    callbackFn && callbackFn(error.response)
+  })
+}
