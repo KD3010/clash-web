@@ -60,7 +60,7 @@ export const registerUser = async (data: {name: string, email: string, password:
 }
 
 export const loginUser = async (data: {email: string, password: string}, callbackFn: Function) => {
-  axios.post(API_BASE_PATH + '/auth/login', data)
+  axios.post(API_BASE_PATH + '/auth/verify-login-credentials', data)
   .then(response => {
     callbackFn && callbackFn(response)
   }).catch(error => {

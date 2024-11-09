@@ -1,3 +1,4 @@
+import { loginUser } from "@/context/AuthProvider";
 import axios from "axios";
 import { AuthOptions, type ISODateString } from "next-auth";
 import type { JWT } from "next-auth/jwt";
@@ -34,11 +35,12 @@ export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
             credentials: {
+              email: {},
               password: {}
             },
             async authorize(credentials, req) {
-              const data = await axios.post("http://localhost:8000/api/auth/login", credentials);
-              const user = data?.data;
+              const res = await axios.post("http://localhost:8000/api/auth/login", { email: credentials?.email, password: credentials?.password});
+              const user = res?.data?.data;
         
               if (user) {
                 return user

@@ -8,6 +8,7 @@ import { loginUser } from '@/context/AuthProvider';
 import { toast } from "sonner";
 import { useRouter } from 'next/navigation';
 import ErrorText from './ErrorText';
+import { signIn } from 'next-auth/react';
 
 const initialFormData = {
     email: '',
@@ -37,11 +38,14 @@ const LoginForm = () => {
             response?.data?.type === 'failed' ? toast.error(response?.data?.message) : toast.success(response?.data?.message);
             setLoading(false);
 
-            if(response?.status === 200) {
-                setFormData(initialFormData);
-                router.push('/login')
+            if(response?.status === 201) {
+                signIn("credentials", {
+                    email: formData.email,
+                    password: formData.password,
+                    redirect: true,
+                    callbackUrl: "/dashboard"
+                })
             } else if(response?.status === 422) {
-                console.log(response)
                 setErrors(response?.data?.error)
             }
         })
